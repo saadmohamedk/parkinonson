@@ -18,11 +18,17 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-
+  sdk: ">=2.17.0 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
+  #flutter_screenutil: ^5.9.0
+  flutter_screenutil: ^5.9.0
+  pin_code_fields : ^8.0.1
+  intl_phone_field: ^3.2.0
+  date_field: ^4.0.1
+  #flutter_native_splash: ^2.3.10
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -30,9 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  flutter_native_splash: ^2.3.10
   flutter_test:
     sdk: flutter
 
+flutter_native_splash:
+  color: "#42a5f5"
+  image: images/splash.png
+  android_gravity: fill
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
