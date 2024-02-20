@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:intl/intl.dart';
 import 'package:intl/intl_standalone.dart' if (dart.library.html) 'package:intl/intl_browser.dart';
 
+import 'Login_screen.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await findSystemLocale();
@@ -44,47 +46,41 @@ class _Welcome extends State<Welcome> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome',
-                      style: TextStyle(
-                          fontSize: 8.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 320.w, 0.h),
+                  child: Text(
+                    'Welcome',
+                    style: TextStyle(
+                        fontSize: 8.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Please fill your information',
-                      style: TextStyle(
-                          fontSize: 4.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 280.w, 0.h),
+                  child: Text(
+                    'Please fill your information',
+                    style: TextStyle(
+                        fontSize: 6.sp,
+                        //fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name',
-                      style: TextStyle(
-                        fontSize: 6.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 334.w, 0.h),
+                  child: Text(
+                    'Name',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(2.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     controller: nameController,
                     decoration:  InputDecoration(
@@ -107,20 +103,18 @@ class _Welcome extends State<Welcome> {
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Phone Number',
-                      style: TextStyle(
-                        fontSize: 6.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 305.w, 0.h),
+                  child: Text(
+                    'Phone Number',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   //child:IntlPhoneField(
                   child: TextFormField(
                     keyboardType: TextInputType.phone,
@@ -144,27 +138,25 @@ class _Welcome extends State<Welcome> {
                       }
                       final regexp = RegExp(r'^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$');
                       if(!regexp.hasMatch(value)) {
-                        return 'Enter a valid Email';
+                        return 'Enter a Valid Phone Number';
                       }
                       return null;
                     },
 
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Address',
-                      style: TextStyle(
-                        fontSize: 6.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 325.w, 0.h),
+                  child: Text(
+                    'Address',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     controller: addressController,
                     decoration:  InputDecoration(
@@ -187,20 +179,18 @@ class _Welcome extends State<Welcome> {
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Working Days',
-                      style: TextStyle(
-                        fontSize: 6.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 310.w, 0.h),
+                  child: Text(
+                    'Working Days',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   //child: DateTimeFormField(
                   child: TextFormField(
                     controller: workingDaysController,
@@ -236,7 +226,7 @@ class _Welcome extends State<Welcome> {
                   height: 15.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(2.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -244,17 +234,20 @@ class _Welcome extends State<Welcome> {
                         print('${phoneNumberController.text}');
                         print('${addressController.text}');
                         print('${workingDaysController.text}');
-                        //print('${workingHoursController.text}');
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),);
                       }
                     },
                     child: Center(
-                      child: const Text('Continue'),
+                      child:  Text('Continue' ,style: TextStyle(
+                      fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                      ),),
                     ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.teal,
-                      //padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
 
                     ),
                   ),

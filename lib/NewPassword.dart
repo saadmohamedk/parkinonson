@@ -1,6 +1,7 @@
+import 'package:ana5/Login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ana5/Welcome.dart';
+//import 'package:ana5/Welcome.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({Key? key}) : super(key: key);
@@ -11,7 +12,9 @@ class NewPassword extends StatefulWidget {
 
 class _NewPasswordState extends State<NewPassword> {
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   bool _isSecurePassword = true;
+  bool _isSecureConfirmPassword = true;
   final formKey = GlobalKey<FormState>();
   late String password;
   //late String togglePassword;
@@ -96,20 +99,18 @@ class _NewPasswordState extends State<NewPassword> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Password',
-                        style: TextStyle(
-                          fontSize: 7.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0.w, 0.h, 320.w, 0.h),
+                    child: Text(
+                      'Password',
+                      style: TextStyle(
+                        fontSize: 7.sp,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
+                    ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(5.h.w),
+                    padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                     child: TextFormField(
                       onChanged: (val) => checkPassword(val),
                       obscureText: _isSecurePassword,
@@ -144,28 +145,26 @@ class _NewPasswordState extends State<NewPassword> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Confirm Password',
-                        style: TextStyle(
-                          fontSize: 7.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0.w, 0.h, 295.w, 0.h),
+                    child: Text(
+                      'Confirm Password',
+                      style: TextStyle(
+                        fontSize: 7.sp,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
+                    ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(5.h.w),
+                    padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                     child: TextFormField(
-                      obscureText: _isSecurePassword,
-                      controller: passwordController,
+                      obscureText: _isSecureConfirmPassword,
+                      controller: confirmPasswordController,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock_outline),
                         //labelText: 'password',
                         hintText: 'password',
-                        suffixIcon: togglePassword(),
+                        suffixIcon: toggleConfirmPassword(),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.r),
                         ),
@@ -186,19 +185,26 @@ class _NewPasswordState extends State<NewPassword> {
                     height: 2.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(2.h.w),
+                    padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                     child: ElevatedButton(
-                      onPressed: strength<1/2? null : (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()),);
-                        print('${passwordController.text}');
+                      onPressed: strength<1/2? null: (){
+                        if(passwordController.text==confirmPasswordController.text){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),);
+                          print('${passwordController.text}');
+                          print('${confirmPasswordController.text}');
+                        }
                       },
                       child: Center(
-                        child: const Text('Reset Password'),
+                        child:  Text('Reset Password' ,style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                        ),),
                       ),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.teal,
-                        padding: EdgeInsets.fromLTRB(0.w, 15.h, 0.w, 15.h),
+                        padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
                       ),
                     ),
                   ),
@@ -223,5 +229,18 @@ class _NewPasswordState extends State<NewPassword> {
         color: Colors.grey,
       );
     }
+  Widget toggleConfirmPassword() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          _isSecureConfirmPassword = !_isSecureConfirmPassword;
+        });
+      },
+      icon: _isSecureConfirmPassword
+          ? Icon(Icons.visibility)
+          : Icon(Icons.visibility_off),
+      color: Colors.grey,
+    );
+  }
   }
 

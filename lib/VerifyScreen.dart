@@ -1,5 +1,6 @@
 import 'package:ana5/NewPassword.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -12,20 +13,24 @@ class Verify extends StatefulWidget {
 
 class _Verify extends State<Verify> {
   final formKey = GlobalKey<FormState>();
+  final codeController = TextEditingController();
 
-  Widget _buildPinCodeFields (BuildContext context){
+  Widget _buildPinCodeFields(BuildContext context) {
     return Container(
       child: PinCodeTextField(
-        appContext:context ,
+        appContext: context,
         autoFocus: true,
         cursorColor: Colors.black,
+        controller: codeController,
+
         keyboardType: TextInputType.number,
+        //scrollPadding: EdgeInsets.all(20),
         length: 4,
         obscureText: false,
-        animationType: AnimationType.fade,
+        animationType: AnimationType.scale,
         pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(5.r),
           fieldHeight: 70.h,
           fieldWidth: 20.w,
           fieldOuterPadding: EdgeInsets.fromLTRB(30.w, 0.h, 30.w, 0.h),
@@ -42,11 +47,9 @@ class _Verify extends State<Verify> {
         enableActiveFill: true,
         onCompleted: (code) {
           //otpCode = code,
-
+          print(code);
           print("Code is Completed");
-        },
-        onChanged: (value) {
-          print(value);
+
         },
       ),
     );
@@ -97,7 +100,7 @@ class _Verify extends State<Verify> {
                 ),
                 _buildPinCodeFields(context),
                 SizedBox(
-                  height: 5.h,
+                  height: 4.h,
                 ),
                 InkWell(
                   child: Text(
@@ -107,27 +110,44 @@ class _Verify extends State<Verify> {
                         fontWeight: FontWeight.bold,
                         color: Colors.teal),
                   ),
-                  onTap: (){
+                  onTap: () {
                     print('Resend Code');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Verify()),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Verify()),
+                    );
                   },
                 ),
                 SizedBox(
                   height: 12.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => NewPassword()),);
+                      if (formKey.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewPassword()),
+                        );
+                        print('${codeController.text}');
+                      }
                     },
                     child: Center(
-                      child: const Text('Verify'),
+                      child: Text(
+                        'Verify',
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.teal,
                       padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
                     ),
                   ),
                 ),

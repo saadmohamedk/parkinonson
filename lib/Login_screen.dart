@@ -3,6 +3,8 @@ import 'package:ana5/Sign_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+//import 'Welcome.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -37,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20.h,
                 ),
                 Text(
-                  'Log in',
+                  'LogIn',
                   style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
@@ -46,20 +48,18 @@ class _LoginScreenState extends State<LoginScreen> {
                  SizedBox(
                   height: 15.h,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Email',
-                      style: TextStyle(
-                          fontSize: 7.sp,
-                          fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ],
+                Padding(
+                  padding:  EdgeInsets.fromLTRB(0.w, 0.h, 334.w, 0.h),
+                  child: Text(
+                    'Email',
+                    style: TextStyle(
+                        fontSize: 7.sp,
+                        fontWeight: FontWeight.bold,
+                        ),
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(5.h.w),
+                  padding:  EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     controller: emailController,
                     decoration:  InputDecoration(
@@ -89,20 +89,18 @@ class _LoginScreenState extends State<LoginScreen> {
                  SizedBox(
                   height: 20.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Password',
-                      style: TextStyle(
-                        fontSize: 7.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding:  EdgeInsets.fromLTRB(0.w, 0.h, 320.w, 0.h),
+                  child: Text(
+                    'Password',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(5.h.w),
+                  padding:  EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     obscureText: _isSecurePassword,
                     controller: passwordController,
@@ -129,10 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 InkWell(
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(315.w, 0.h, 0.w, 5.h),
+                    margin: EdgeInsets.fromLTRB(296.w, 0.h, 0.w, 5.h),
                     child: Text(
-                      'forget password?',
+                      'Forget password?',
                       style: TextStyle(
+                        fontSize: 7.sp,
                         color: Colors.teal,
                         fontWeight: FontWeight.bold,
                       ),
@@ -144,27 +143,35 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                  SizedBox(
-                  height: 5.h,
+                  height: 20.h,
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(8.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: ElevatedButton(
                     onPressed: () {
                       if(formKey.currentState!.validate()) {
                         print('${emailController.text}');
                         print('${passwordController.text}');
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => homePage()),);
                       }
                     },
                     child: Center(
-                      child: const Text('Login'),
+                      child:  Text('Login' ,style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                      ),),
                     ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.teal,
                       padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
 
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -172,6 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       'Not have an account ? ',
                       style: TextStyle(
+                        fontSize: 7.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -179,6 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         'Sign up',
                         style: TextStyle(
+                          fontSize: 7.sp,
                           color: Colors.teal,
                           fontWeight: FontWeight.bold,
                         ),

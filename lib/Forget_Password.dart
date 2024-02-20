@@ -50,30 +50,34 @@ class _ForgetPassword extends State<ForgetPassword> {
                   height: 20.h,
                 ),
                 Text(
-                  'Please Enter Your Email Address'
-                      ' to receive a Verification Code',
+                  'Please Enter Your Email Address to',
                   style: TextStyle(
-                      fontSize: 8.sp,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 10.sp,
+                      //fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+                Text(
+                  'receive a Verification Code',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      //fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Email',
-                      style: TextStyle(
-                        fontSize: 7.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 334.w, 0.h),
+                  child: Text(
+                    'Email',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(5.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     controller: emailController,
                     decoration:  InputDecoration(
@@ -107,7 +111,7 @@ class _ForgetPassword extends State<ForgetPassword> {
                   height: 5.h,
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(8.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -116,12 +120,16 @@ class _ForgetPassword extends State<ForgetPassword> {
                       }
                     },
                     child: Center(
-                      child: const Text('Send'),
+                      child:  Text('Send' ,style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                      ),),
                     ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.teal,
                       padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
 
                     ),
                   ),

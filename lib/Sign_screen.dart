@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'Welcome.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -14,23 +16,10 @@ class _SignUp extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  //var isVisible;
+
   bool _isSecurePassword = true;
-  bool _isPasswordEightCharacters = false;
-  bool _hasPasswordOneNumber= false;
-  onPasswordChanged(String password){
-    final numericRegex = RegExp(r'[0-9]');
-    setState(() {
-      _isPasswordEightCharacters = false;
-      if(password.length >= 8)
-        _isPasswordEightCharacters = true;
 
-      _hasPasswordOneNumber =false;
-      if(numericRegex.hasMatch(password))
-        _hasPasswordOneNumber = true;
-    });
 
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,29 +42,27 @@ class _SignUp extends State<SignUp> {
                   height: 1.h,
                 ),
                 Text(
-                  'Sign up',
+                  'SignUp',
                   style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.teal),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Username',
-                      style: TextStyle(
-                        fontSize: 6.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 320.w, 0.h),
+                  child: Text(
+                    'Username',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     controller: userNameController,
-                    decoration:  InputDecoration(
+                    decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person_outline),
                       //labelText: 'Email',
                       hintText: 'Username',
@@ -95,26 +82,24 @@ class _SignUp extends State<SignUp> {
                     },
                   ),
                 ),
-                 SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Email',
-                      style: TextStyle(
-                        fontSize: 7.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 5.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 334.w, 0.h),
+                  child: Text(
+                    'Email',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
                     controller: emailController,
-                    decoration:  InputDecoration(
+                    decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email_outlined),
                       //labelText: 'Email',
                       hintText: 'Email',
@@ -138,25 +123,23 @@ class _SignUp extends State<SignUp> {
                     },
                   ),
                 ),
-                 SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Password',
-                      style: TextStyle(
-                        fontSize: 7.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 5.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 320.w, 0.h),
+                  child: Text(
+                    'Password',
+                    style: TextStyle(
+                      fontSize: 7.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: TextFormField(
-                    onChanged: (password) => onPasswordChanged(password),
+                    //onChanged: (password) => onPasswordChanged(password),
                     obscureText: _isSecurePassword,
                     controller: passwordController,
                     decoration: InputDecoration(
@@ -177,66 +160,45 @@ class _SignUp extends State<SignUp> {
                       if (data!.isEmpty) {
                         return 'This field is required';
                       }
+                      final regexp = RegExp(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
+                      if (!regexp.hasMatch(data)) {
+                        return 'Enter a Strong Password';
+                      }
                       return null;
                     },
                   ),
                 ),
-                Row(
-                  children: [
-                    AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
-                      width: 17.r,
-                      height: 17.r,
-                      decoration: BoxDecoration(
-                        color: _isPasswordEightCharacters ? Colors.green : Colors.transparent,
-                        border: _isPasswordEightCharacters ? Border.all(color: Colors.transparent) :
-                         Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(50.r),
-                      ),
-                      child: Center(child: Icon(Icons.check,color: Colors.white,size: 15.r,),),
-
-                    ),
-                    SizedBox(width: 3.w,),
-                    Text('Contains at least 8 characters')
-                  ],
-                ),
-                SizedBox(height: 3.h,),
-                Row(
-                  children: [
-                    AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
-                      width: 17.r,
-                      height: 17.r,
-                      decoration: BoxDecoration(
-                        color: _hasPasswordOneNumber ? Colors.green : Colors.transparent,
-                        border: _hasPasswordOneNumber ? Border.all(color: Colors.transparent) :
-                        Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(50.r),
-                      ),
-                      child: Center(child: Icon(Icons.check,color: Colors.white,size: 15.r,),),
-
-                    ),
-                    SizedBox(width: 3.w,),
-                    Text('Contains at least 1 number')
-                  ],
+                SizedBox(
+                  height: 35.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(3.h.w),
+                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         print('${userNameController.text}');
                         print('${emailController.text}');
                         print('${passwordController.text}');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Welcome()),
+                        );
                       }
                     },
                     child: Center(
-                      child: const Text('Sign up'),
+                      child: Text(
+                        'Sign up',
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.teal,
-                      padding: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
+                      padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
                     ),
                   ),
                 ),
@@ -246,6 +208,7 @@ class _SignUp extends State<SignUp> {
                     Text(
                       'Already have an account ? ',
                       style: TextStyle(
+                        fontSize: 7.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -253,6 +216,7 @@ class _SignUp extends State<SignUp> {
                       child: Text(
                         'Login',
                         style: TextStyle(
+                          fontSize: 7.sp,
                           color: Colors.teal,
                           fontWeight: FontWeight.bold,
                         ),
