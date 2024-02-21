@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ana5/NewPassword.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
@@ -14,6 +16,21 @@ class Verify extends StatefulWidget {
 class _Verify extends State<Verify> {
   final formKey = GlobalKey<FormState>();
   final codeController = TextEditingController();
+  int _counter=30;
+  late Timer _timer;
+  void startTimer(){
+    _counter=30;
+    _timer=Timer.periodic(Duration(seconds: 1),(timer){
+      if(_counter>0){
+        setState(() {
+          _counter--;
+        });
+      }else{
+        _timer.cancel();
+        //_counter=30;
+    }
+  });
+}
 
   Widget _buildPinCodeFields(BuildContext context) {
     return Container(
@@ -102,21 +119,31 @@ class _Verify extends State<Verify> {
                 SizedBox(
                   height: 4.h,
                 ),
-                InkWell(
-                  child: Text(
-                    'Resend Code',
-                    style: TextStyle(
-                        fontSize: 8.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal),
-                  ),
-                  onTap: () {
-                    print('Resend Code');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Verify()),
-                    );
-                  },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      child: Text(
+                        'Resend Code',
+                        style: TextStyle(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal),
+                      ),
+                      onTap:  () {
+                        startTimer();
+                        print('Resend Code');
+                      },
+                    ),
+                    SizedBox(
+                      width: 14.w,
+                    ),
+                    Text('$_counter',style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.bold,color: Colors.teal),),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    Text('Seconds',style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.bold,color: Colors.teal),),
+                  ],
                 ),
                 SizedBox(
                   height: 12.h,

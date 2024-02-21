@@ -28,9 +28,9 @@ class _Welcome extends State<Welcome> {
   final workingDaysController = TextEditingController();
   //final workingHoursController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  DateTime? selectedDate;
-  DateTime? selectedTime;
-  DateTime? selectedDateTime;
+  //DateTime? selectedDate;
+  //DateTime? selectedTime;
+  //DateTime? selectedDateTime;
 
   //final passwordController = TextEditingController();
   //bool _isSecurePassword = true;
@@ -44,30 +44,31 @@ class _Welcome extends State<Welcome> {
           child: Form(
             key: formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 320.w, 0.h),
-                  child: Text(
-                    'Welcome',
-                    style: TextStyle(
-                        fontSize: 8.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                Container(
+                  alignment: Alignment.center,
+                  //margin: EdgeInsets.fromLTRB(12.w, 0.h, 10.w, 0.h),
+                  //padding: EdgeInsets.fromLTRB(20, 0, 0,0 ),
+                  child: Image(
+                    image: AssetImage('images/login.jpg'),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 280.w, 0.h),
-                  child: Text(
-                    'Please fill your information',
-                    style: TextStyle(
-                        fontSize: 6.sp,
-                        //fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
+                Text(
+                  textAlign:TextAlign.center,
+                  'Welcome',
+                  style: TextStyle(
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
-                SizedBox(
-                  height: 15.h,
+                Text(
+                  textAlign:TextAlign.center,
+                  'Please fill your information',
+                  style: TextStyle(
+                      fontSize: 6.sp,
+                      //fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0.w, 0.h, 334.w, 0.h),
@@ -136,10 +137,10 @@ class _Welcome extends State<Welcome> {
                       if(value!.isEmpty) {
                         return 'This field is required';
                       }
-                      final regexp = RegExp(r'^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$');
-                      if(!regexp.hasMatch(value)) {
-                        return 'Enter a Valid Phone Number';
-                      }
+                      //final regexp = RegExp(r'^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$');
+                      //if(!regexp.hasMatch(value)) {
+                        //return 'Enter a Valid Phone Number';
+                      //}
                       return null;
                     },
 
@@ -222,11 +223,8 @@ class _Welcome extends State<Welcome> {
                     //},
                   ),
                   ),
-                SizedBox(
-                  height: 15.h,
-                ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(3.w, 5.h, 3.w, 3.h),
+                  padding: EdgeInsets.fromLTRB(3.w, 2.h, 3.w, 1.h),
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -246,7 +244,7 @@ class _Welcome extends State<Welcome> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.teal,
-                      padding: EdgeInsets.fromLTRB(0.w, 20.h, 0.w, 20.h),
+                      padding: EdgeInsets.fromLTRB(0.w, 13.h, 0.w, 13.h),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
 
                     ),
